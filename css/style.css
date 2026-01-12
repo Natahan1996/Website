@@ -136,13 +136,59 @@ a.highlight {
 }
 
 /* Hero Section */
+/* Hero Section */
 #intro {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 0;
+    padding-top: 60px;
+    position: relative;
+    overflow: hidden;
+    /* Spice up: Dark gradient + Tech feel */
+    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+}
+
+#intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)),
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(56, 189, 248, 0.03) 1px, rgba(56, 189, 248, 0.03) 2px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Subtle glow behind text */
+#intro::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+    filter: blur(60px);
+    z-index: -1;
+    animation: pulseGlow 8s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
 .hero-content {
@@ -271,7 +317,8 @@ article.card:hover {
 
 .image-wrapper {
     width: 100%;
-    height: 200px;
+    height: 350px;
+    /* Increased from 200px to uncrop images */
     overflow: hidden;
 }
 
@@ -279,11 +326,14 @@ article.card:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    /* flexible center focus */
     transition: transform 0.5s ease;
 }
 
 article.card:hover .image-wrapper img {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    /* reduced scale to keep content visible */
 }
 
 article.card .content {
